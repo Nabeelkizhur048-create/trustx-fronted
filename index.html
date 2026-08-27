@@ -49,5 +49,6 @@ function closeModal(){document.getElementById('loginModal').classList.add('hidde
 function doTrade(){const a=document.getElementById('trcAddr').value;if(!a.startsWith('T')){alert('Enter valid TRC20 address starting with T');return}alert('🛡️ Shield Verified: '+a.substring(0,8)+'...');}
 function doConnect(){const w=document.getElementById('wallet').value;if(!w){alert('Enter TRC20 Address');return}alert('🛡️ Wallet Shield Connected!');closeModal()}
 </script>
+  <a href="/wallet.html" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#2563EB;color:white;padding:15px 24px;border-radius:99px;font-weight:900;">🛡️ Open Wallet</a>
 </body>
 </html>
