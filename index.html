@@ -1,6 +1,45 @@
-<!-- RIGHT SIDE - PRO PREMIUM VERSION -->
-<div>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrustX - Premium</title>
+<style>
+body{ background:#080A0F; margin:0; font-family: Inter, sans-serif; }
+.main-wrap{ display:grid; grid-template-columns: 1fr 380px; gap:20px; max-width:1250px; margin:0 auto; padding:20px; }
+@media(max-width:900px){ .main-wrap{ grid-template-columns: 1fr; } }
+.left-card{ background:linear-gradient(180deg,#12151F 0%,#0E111A 100%); border:1px solid #1E293B; border-radius:20px; padding:20px; }
+.input-box{ background:#080A0F; border:1px solid #1E293B; border-radius:14px; padding:14px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; }
+.input-box input{ background:transparent; border:none; color:white; font-size:22px; font-weight:800; width:120px; outline:none; }
+</style>
+</head>
+<body>
 
+<div class="main-wrap">
+
+<!-- LEFT SIDE - SWAP -->
+<div class="left-card">
+  <h2 style="color:white; margin:0;">Exchange AED to Crypto</h2>
+  <p style="color:#666; font-size:12px;">Best rate, Instant payout</p>
+  
+  <div style="margin-top:20px;">
+    <label style="color:#888; font-size:11px;">YOU SEND</label>
+    <div class="input-box"><input type="number" value="1000" id="aedInput"><span style="color:white; font-weight:bold;">🇦🇪 AED</span></div>
+  </div>
+  <div style="text-align:center; margin:5px; color:#333;">↓</div>
+  <div>
+    <label style="color:#888; font-size:11px;">YOU GET</label>
+    <div class="input-box"><input type="text" value="~ 272" id="usdtOutput" readonly><span style="color:#00ff88; font-weight:bold;">USDT</span></div>
+  </div>
+  <button style="width:100%; background:linear-gradient(90deg,#3b82f6,#2563eb); color:white; border:none; padding:16px; border-radius:14px; font-weight:800; margin-top:15px; cursor:pointer;">Exchange Now →</button>
+  
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:15px;">
+    <div style="background:#0A0C13; border:1px solid #1A2030; border-radius:12px; padding:12px; text-align:center;"><div style="color:#888; font-size:9px;">RATE</div><div style="color:white; font-size:12px; font-weight:bold;">1 AED = 0.27 USDT</div></div>
+    <div style="background:#0A0C13; border:1px solid #1A2030; border-radius:12px; padding:12px; text-align:center;"><div style="color:#888; font-size:9px;">FEE</div><div style="color:#00ff88; font-size:12px; font-weight:bold;">$0 Fee</div></div>
+  </div>
+</div>
+
+<!-- RIGHT SIDE - YOUR CODE (FIXED) -->
+<div>
 <!-- 1. WHY TRUSTX - TOP -->
 <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:16px;">
   <div style="background:linear-gradient(180deg, #111318 0%, #0E1015 100%); border:1px solid #222; border-radius:14px; padding:14px 10px; text-align:center;">
@@ -16,8 +55,7 @@
     <div style="color:white; font-size:11px; font-weight:800;">24/7 Support</div><div style="color:#666; font-size:9px; margin-top:2px;">Always Online</div>
   </div>
 </div>
-
-<!-- 2. REAL LIVE RATES - 6 + MORE (PAYOUTS STYLE) -->
+<!-- 2. RATES -->
 <div style="background:#111318; border:1px solid #1E293B; border-radius:16px; padding:14px; margin-bottom:16px;">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
     <h3 style="color:white; font-size:12px; font-weight:800; margin:0;">🌍 Real Live Rates</h3>
@@ -26,58 +64,13 @@
   <div id="rates-ticker" style="display:flex; flex-direction:column; gap:8px;"></div>
   <button id="more-rates-btn" onclick="toggleRates()" style="width:100%; margin-top:10px; background:#0a0a0a; border:1px solid #222; color:#888; padding:8px; border-radius:8px; font-size:11px; font-weight:bold; cursor:pointer;">↓ Show 12 More Rates</button>
 </div>
-
-<!-- 3. LIVE PAYOUTS - USDT ONLY -->
+<!-- 3. PAYOUTS USDT ONLY -->
 <div style="background:#111318; border:1px solid #222; border-radius:16px; padding:14px;">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
     <h3 style="color:white; font-size:12px; font-weight:800; margin:0;">🔴 Live Payouts</h3><span style="color:#00ff88; font-size:9px;">● 1,248 Online</span>
   </div>
   <div id="payout-list" style="display:flex; flex-direction:column; gap:8px;"></div>
 </div>
-
 </div>
 
-<script>
-const flags = { AED:"🇦🇪", INR:"🇮🇳", SAR:"🇸🇦", USD:"🇺🇸", EUR:"🇪🇺", GBP:"🇬🇧", PKR:"🇵🇰", BDT:"🇧🇩", QAR:"🇶🇦", KWD:"🇰🇼", OMR:"🇴🇲", BHD:"🇧🇭", PHP:"🇵🇭", TRY:"🇹🇷", ZAR:"🇿🇦", RUB:"🇷🇺", CNY:"🇨🇳", JPY:"🇯🇵" };
-let allRates = [];
-let showAll = false;
-
-async function loadRealRates(){
-  try{
-    const res = await fetch('https://open.er-api.com/v6/latest/USD');
-    const data = await res.json();
-    allRates = [];
-    for(let code in flags){ if(data.rates[code]) allRates.push({code, flag:flags[code], val:data.rates[code]}) }
-    renderRates();
-    document.getElementById('live-time').innerText = '● LIVE ' + new Date().toLocaleTimeString();
-  }catch(e){}
-}
-function renderRates(){
-  const container = document.getElementById('rates-ticker');
-  const list = showAll? allRates : allRates.slice(0,6);
-  container.innerHTML = list.map(r=>`
-    <div style="display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; padding:10px 12px; border-radius:10px; border:1px solid #1a1a1a;">
-      <div style="display:flex; align-items:center; gap:10px;"><div style="font-size:18px;">${r.flag}</div><div><div style="color:white; font-size:12px; font-weight:bold;">${r.code}</div><div style="color:#666; font-size:9px;">vs USD</div></div></div>
-      <div style="text-align:right;"><div style="color:white; font-weight:800; font-size:13px;">${r.val.toFixed(2)}</div><div style="color:#00ff88; font-size:8px;">● live</div></div>
-    </div>`).join('');
-  document.getElementById('more-rates-btn').innerText = showAll? '↑ Show Less' : `↓ Show ${allRates.length-6} More Rates`;
-}
-function toggleRates(){ showAll=!showAll; renderRates(); }
-loadRealRates(); setInterval(loadRealRates, 60000);
-
-// PAYOUTS - USDT ONLY
-const payouts = [
-  {name:"Ali M.", amt:"1809 USDT", time:"Just now"},
-  {name:"Salman M.", amt:"1555 USDT", time:"Just now"},
-  {name:"Vikram M.", amt:"503 USDT", time:"Just now"},
-];
-function renderPayouts(){
-  document.getElementById('payout-list').innerHTML = payouts.map(p=>`
-    <div style="display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; padding:10px 12px; border-radius:10px; border:1px solid #1a1a1a;">
-      <div style="display:flex; align-items:center; gap:10px;"><div style="width:28px; height:28px; background:#1e293b; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:white; font-weight:bold;">${p.name[0]}</div><div><div style="color:white; font-size:11px; font-weight:bold;">${p.name}</div><div style="color:#888; font-size:10px;">${p.amt}</div></div></div>
-      <div style="text-align:right;"><div style="color:#00ff88; font-size:10px; font-weight:bold;">✓ Paid</div><div style="color:#555; font-size:8px;">${p.time}</div></div>
-    </div>`).join('');
-}
-renderPayouts();
-setInterval(()=>{ payouts.unshift({name:["Vikram","Ali","Raj","Salman","Ahmad"][Math.floor(Math.random()*5)]+" M.", amt:Math.floor(Math.random()*3000+100)+" USDT", time:"Just now"}); payouts.pop(); renderPayouts(); }, 3500);
-</script>
+</div>
