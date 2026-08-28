@@ -7,46 +7,26 @@
  body{background:#000; margin:0; font-family:-apple-system,sans-serif; color:white;}
 .top{background:#17171B; margin:12px; border-radius:16px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center;}
 .rate-card{background:#17171B; border:1px solid rgba(255,255,255,0.07); border-radius:16px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
-.rate-card:hover{border-color:rgba(252,213,53,0.3);}
 .view-btn{background:#FCD535; color:#000; border:none; width:100%; padding:14px; border-radius:12px; font-weight:800; margin-top:10px;}
 </style>
 </head>
 <body>
-
 <div style="max-width:500px; margin:0 auto; padding-bottom:30px;">
-
-<!-- HEADER -->
 <div class="top">
-  <div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="window.location.href='index.html'">
-    <span style="font-size:20px;">←</span>
-    <div style="font-weight:800;">Trust<span style="color:#FCD535">X</span> <span style="font-size:10px; color:rgba(255,255,255,0.5); letter-spacing:2px;">TRC20</span></div>
-  </div>
+  <div style="display:flex; align-items:center; gap:10px;" onclick="location.href='index.html'"><span>←</span><div style="font-weight:800;">Trust<span style="color:#FCD535">X</span> TRC20</div></div>
   <div style="font-size:12px; background:rgba(0,200,83,0.15); color:#00C853; padding:4px 10px; border-radius:20px;">● LIVE</div>
 </div>
-
-<!-- TITLE -->
 <div style="padding:20px 16px 10px;">
   <h2 style="margin:0; font-size:22px; font-weight:900;">📈 Live <span style="color:#FCD535">USDT</span> Rates</h2>
-  <p style="margin:6px 0 0; font-size:12px; color:rgba(255,255,255,0.4);">Real-time Binance price • 18 Countries • Updates every 10s</p>
+  <p style="margin:6px 0 0; font-size:12px; color:rgba(255,255,255,0.4);">Real-time Binance price • 40 Countries • Updates every 10s</p>
   <input id="search" oninput="filter()" placeholder="🔍 Search India, Dubai, USA..." style="width:100%; background:#17171B; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:12px 14px; color:white; margin-top:14px; outline:none; box-sizing:border-box;">
 </div>
-
-<!-- RATES -->
-<div id="rates" style="padding:0 12px;">
-  <!-- JS load -->
-</div>
-
-<!-- VIEW ALL BUTTON -->
-<div style="padding:0 12px;">
-  <button id="toggleBtn" onclick="toggleView()" class="view-btn">View All Countries 🌍</button>
-</div>
-
+<div id="rates" style="padding:0 12px;"></div>
+<div style="padding:0 12px;"><button id="toggleBtn" onclick="toggleView()" class="view-btn">View All 40 Countries 🌍</button></div>
 <div style="text-align:center; margin-top:20px; font-size:10px; color:rgba(255,255,255,0.25);">Powered by Binance API • TrustX TRC20</div>
-
 </div>
-
 <script>
- const countries = [
+const countries = [
  {f:'USD', n:'United States', flag:'🇺🇸'}, {f:'INR', n:'India', flag:'🇮🇳'}, {f:'AED', n:'UAE Dubai', flag:'🇦🇪'},
  {f:'EUR', n:'Europe', flag:'🇪🇺'}, {f:'GBP', n:'UK', flag:'🇬🇧'}, {f:'SAR', n:'Saudi Arabia', flag:'🇸🇦'},
  {f:'KWD', n:'Kuwait', flag:'🇰🇼'}, {f:'QAR', n:'Qatar', flag:'🇶🇦'}, {f:'BHD', n:'Bahrain', flag:'🇧🇭'},
@@ -62,59 +42,36 @@
  {f:'KZT', n:'Kazakhstan', flag:'🇰🇿'}, {f:'UZS', n:'Uzbekistan', flag:'🇺🇿'}, {f:'BRL', n:'Brazil', flag:'🇧🇷'},
  {f:'MXN', n:'Mexico', flag:'🇲🇽'},
 ];
-let prices = {USD:1, INR:83.42, AED:3.6725, EUR:0.921, GBP:0.791, SAR:3.75, KWD:0.307, QAR:3.64, BHD:0.377, OMR:0.385, MYR:4.71, SGD:1.34, PKR:278.5, BDT:117.2, PHP:58.3, TRY:32.1, NGN:1450, EGP:49.2, AUD:1.52, CAD:1.36, JPY:154.2, CNY:7.24, RUB:92.5, ZAR:18.9, LKR:300.5, NPR:133.2, THB:36.8, IDR:16150, VND:25400, KES:130.5, GHS:15.2, ETB:57.3, JOD:0.709, LBP:89500, IQD:1310, IRR:42250, KZT:445, UZS:12650, BRL:5.15, MXN:17.2};
-let prices = {USD:1, INR:83.42, AED:3.6725, EUR:0.921, GBP:0.791, SAR:3.75, KWD:0.307, QAR:3.64, BHD:0.377, OMR:0.385, MYR:4.71, SGD:1.34, PKR:278.5, BDT:117.2, PHP:58.3, TRY:32.1, NGN:1450, EGP:49.2};
+let prices = {USD:1, INR:83.42, AED:3.67, EUR:0.92, GBP:0.79, SAR:3.75, KWD:0.307, QAR:3.64, BHD:0.377, OMR:0.385, MYR:4.71, SGD:1.34, PKR:278, BDT:117, PHP:58.3, TRY:32.1, NGN:1450, EGP:49.2, AUD:1.52, CAD:1.36, JPY:154, CNY:7.24, RUB:92.5, ZAR:18.9, LKR:300, NPR:133, THB:36.8, IDR:16150, VND:25400, KES:130, GHS:15.2, ETB:57.3, JOD:0.709, LBP:89500, IQD:1310, IRR:42250, KZT:445, UZS:12650, BRL:5.15, MXN:17.2};
 let showAll = false;
 let searchText = '';
-
+function render(){
+ const box = document.getElementById('rates');
+ if(!box) return;
+ box.innerHTML='';
+ let list = countries.filter(c=> c.n.toLowerCase().includes(searchText) || c.f.toLowerCase().includes(searchText));
+ if(!showAll && searchText=='' ) list = list.slice(0,6);
+ list.forEach(c=>{
+  const p = prices[c.f]||1;
+  const ch = (Math.random()*2.2 - 0.5).toFixed(2);
+  const up = parseFloat(ch)>=0;
+  box.innerHTML+=`<div class="rate-card"><div style="display:flex; align-items:center; gap:12px;"><div style="width:40px; height:40px; background:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; border:1px solid rgba(255,255,255,0.1);">${c.flag}</div><div><div style="font-weight:800; font-size:13px;">USDT/${c.f} <span style="font-weight:400; font-size:10px; color:rgba(255,255,255,0.4);">• ${c.n}</span></div><div style="font-size:11px; color:rgba(255,255,255,0.5);">1 USDT = ${p} ${c.f}</div></div></div><div style="display:flex; align-items:center; gap:12px;"><svg width="65" height="26" viewBox="0 0 65 26"><path d="M0 18 Q15 ${up?10:16} 30 ${up?7:19} T65 ${up?4:20}" fill="none" stroke="${up? '#00C853':'#FF3B30'}" stroke-width="2" stroke-linecap="round"/></svg><div style="text-align:right; min-width:58px;"><div style="font-weight:800; font-size:13px;">${p}</div><div style="font-size:11px; color:${up? '#00C853':'#FF3B30'};">${up? '▲':'▼'} ${Math.abs(ch)}%</div></div></div></div>`;
+ });
+ document.getElementById('toggleBtn').innerText = showAll? 'Show Less ▲' : `View All ${countries.length} Countries 🌍`;
+}
+function toggleView(){ showAll=!showAll; render(); }
+function filter(){ searchText = document.getElementById('search').value.toLowerCase(); render(); }
 async function fetchLive(){
  try{
   const r = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
   const d = await r.json();
   for(let k in prices){ if(d.rates[k]) prices[k]=d.rates[k]; }
   render();
- }catch(e){ render(); }
+ }catch(e){ console.log(e); }
 }
-
-function render(){
- const box = document.getElementById('rates');
- box.innerHTML='';
- let list = countries.filter(c=> c.n.toLowerCase().includes(searchText) || c.f.toLowerCase().includes(searchText));
- if(!showAll && searchText=='' ) list = list.slice(0,6);
-
- list.forEach(c=>{
-  const p = prices[c.f];
-  const ch = (Math.random()*2.2 - 0.5).toFixed(2);
-  const up = parseFloat(ch)>=0;
-  box.innerHTML+=`
-  <div class="rate-card">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div style="width:40px; height:40px; background:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; border:1px solid rgba(255,255,255,0.1);">${c.flag}</div>
-      <div>
-        <div style="font-weight:800; font-size:13px;">USDT/${c.f} <span style="font-weight:400; font-size:10px; color:rgba(255,255,255,0.4);">• ${c.n}</span></div>
-        <div style="font-size:11px; color:rgba(255,255,255,0.5);">1 USDT = ${p} ${c.f}</div>
-      </div>
-    </div>
-    <div style="display:flex; align-items:center; gap:12px;">
-      <svg width="65" height="26" viewBox="0 0 65 26"><path d="M0 18 Q15 ${up?10:16} 30 ${up?7:19} T65 ${up?4:20}" fill="none" stroke="${up? '#00C853':'#FF3B30'}" stroke-width="2" stroke-linecap="round"/></svg>
-      <div style="text-align:right; min-width:58px;">
-        <div style="font-weight:800; font-size:13px;">${p}</div>
-        <div style="font-size:11px; color:${up? '#00C853':'#FF3B30'};">${up? '▲':'▼'} ${Math.abs(ch)}%</div>
-      </div>
-    </div>
-  </div>`;
- });
- document.getElementById('toggleBtn').innerText = showAll? 'Show Less ▲' : `View All ${countries.length} Countries 🌍`;
- if(searchText!='') document.getElementById('toggleBtn').style.display='none';
- else document.getElementById('toggleBtn').style.display='block';
-}
-
-function toggleView(){ showAll=!showAll; render(); }
-function filter(){ searchText = document.getElementById('search').value.toLowerCase(); render(); }
-
+render();
 fetchLive();
 setInterval(fetchLive, 10000);
 </script>
-
 </body>
 </html>
