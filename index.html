@@ -63,34 +63,34 @@
     <div style="font-size:20px;">💬</div><div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">24/7 Support</div><div style="color:#888; font-size:9px;">Always Online</div>
   </div>
 </div>
-
-
-</div>
-
-</div>
-</div>
-
 <script>
-const flags = { AED:"🇦🇪", INR:"🇮🇳", SAR:"🇸🇦", USD:"🇺🇸", CNY:"🇨🇳", JPY:"🇯🇵", RUB:"🇷🇺", EUR:"🇪🇺", GBP:"🇬🇧", PKR:"🇵🇰", BDT:"🇧🇩", QAR:"🇶🇦", KWD:"🇰🇼", OMR:"🇴🇲", BHD:"🇧🇭", PHP:"🇵🇭", TRY:"🇹🇷", ZAR:"🇿🇦" };
+const flags={AED:"🇦🇪",INR:"🇮🇳",SAR:"🇸🇦",USD:"🇺🇸",CNY:"🇨🇳",JPY:"🇯🇵",RUB:"🇷🇺",EUR:"🇪🇺",GBP:"🇬🇧",PKR:"🇵🇰",BDT:"🇧🇩",QAR:"🇶🇦",KWD:"🇰🇼",OMR:"🇴🇲",BHD:"🇧🇭",PHP:"🇵🇭",TRY:"🇹🇷",ZAR:"🇿🇦"};
+let allRates={}, showAll=false;
 async function loadRealRates(){
-  try{
-    const res = await fetch('https://open.er-api.com/v6/latest/USD');
-    const data = await res.json();
-    const rates = data.rates;
-    const container = document.getElementById('rates-ticker');
-    container.innerHTML = '';
-    for(let code in flags){
-      if(rates[code]){
-        container.innerHTML += `<div style="background:#1a1a1a; border:1px solid #222; border-radius:10px; padding:8px; text-align:center;"><div style="font-size:16px;">${flags[code]}</div><div style="color:#888; font-size:9px;">${code}</div><div style="color:white; font-weight:bold; font-size:12px;">${rates[code].toFixed(2)}</div></div>`;
-      }
-    }
-    document.getElementById('live-time').innerText = '● LIVE ' + new Date().toLocaleTimeString();
-  }catch(e){}
+ try{
+  const res=await fetch('https://open.er-api.com/v6/latest/USD');
+  const data=await res.json();
+  allRates=data.rates; renderRates();
+  const lt=document.getElementById('live-time');
+  if(lt) lt.innerText='● LIVE '+new Date().toLocaleTimeString().slice(0,5);
+ }catch(e){}
 }
-loadRealRates();
-setInterval(loadRealRates, 60000);
-
-
+function renderRates(){
+ const c=document.getElementById('rates-list'); if(!c) return;
+ c.innerHTML='';
+ const codes=Object.keys(flags);
+ const list=showAll?codes:codes.slice(0,6);
+ list.forEach(code=>{
+  if(allRates[code]){
+   c.innerHTML+=`<div style="display:flex; justify-content:space-between; align-items:center; padding:11px 4px; border-bottom:1px solid #1e1e1e;"><div style="display:flex; align-items:center; gap:10px;"><span style="font-size:18px;">${flags[code]}</span><span style="color:#aaa; font-size:13px; font-weight:700;">${code}</span></div><div style="display:flex; gap:8px;"><span style="color:white; font-weight:800; font-size:13px;">${allRates[code].toFixed(2)}</span><span style="color:#00ff88; font-size:10px;">▲</span></div></div>`;
+  }
+ });
+}
+function toggleRates(){ showAll=!showAll; const b=document.getElementById('view-all-btn'); if(b) b.innerText=showAll?'Show Less ↑':'View All Rates (18) ↓'; renderRates(); }
+loadRealRates(); setInterval(loadRealRates,60000);
 </script>
 </body>
 </html>
+
+
+
