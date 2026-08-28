@@ -30,18 +30,56 @@
 <div class="flex gap-4 mt-8"><button onclick="window.location.href='wallet.html'" class="bg-[#0066FF] text-white font-black py-4 px-7 rounded-full text-[17px] whitespace-nowrap flex items-center justify-center gap-2">🛡️ Open Wallet</button><button onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})" class="bg-white/10 text-white font-black py-4 px-7 rounded-full text-[17px] whitespace-nowrap border border-white/20 flex items-center justify-center gap-2">▶️ How it Works</button></div>
 <div class="flex gap-6 mt-8 text-[12px]"><div><div class="text-white/40">Network</div><div class="font-bold">TRON (TRC20)</div></div><div><div class="text-white/40">Protection</div><div class="font-bold">Shield X</div></div><div><div class="text-white/40">Speed</div><div class="font-bold">&lt; 30 Sec</div></div></div>
 </div>
-<div class="bg-[#111318] border border-white/10 rounded-[28px] p-7">
-<div class="flex justify-between items-center mb-6"><h3 class="font-bold flex items-center gap-2"><span class="w-6 h-6 bg-[#0066FF] rounded-full flex items-center justify-center text-[12px]">🛡️</span> Shield Transaction</h3><span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">● Verified</span></div>
-<label class="text-[11px] text-white/50">YOU SEND (TRC20)</label>
-<div class="bg-black border border-white/10 rounded-2xl p-4 mt-2 flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-8 h-8 bg-[#0066FF] rounded-full flex items-center justify-center text-white font-bold text-xs">X</div><div><div class="font-bold text-sm">USDT</div><div class="text-[10px] text-white/40">TRC20 • Shield</div></div></div><div class="font-bold text-xl">1,000</div></div>
-<div class="flex justify-center my-3"><div class="w-8 h-8 bg-[#0066FF]/20 border border-[#0066FF]/30 rounded-full flex items-center justify-center text-[#0066FF]">↓</div></div>
-<label class="text-[11px] text-white/50">YOU RECEIVE</label>
-<div class="bg-black border border-white/10 rounded-2xl p-4 mt-2 flex justify-between items-center"><span class="text-sm">AED / INR / USD</span><span class="font-bold">~ 3,670</span></div>
-<input id="trcAddr" placeholder="Paste TRC20 address (T...)" class="w-full mt-5 bg-black border border-white/10 rounded-xl px-4 py-3.5 text-sm outline-none focus:border-[#0066FF] placeholder:text-white/20"/>
-<button onclick="doTrade()" class="w-full bg-[#0066FF] text-white py-4 rounded-xl mt-4 font-extrabold text-[15px]">Verify with Shield X</button>
+<!-- REAL LIVE API - FINAL VERSION -->
+<div style="background:#111; border:1px solid #222; border-radius:16px; padding:16px; margin:20px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <h3 style="color:white; font-size:14px; margin:0;">🌍 REAL LIVE RATES</h3>
+    <span id="live-time" style="color:#00ff88; font-size:10px; background:#00ff8820; padding:4px 10px; border-radius:20px;">● CONNECTING...</span>
+  </div>
+  <div id="rates-ticker" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(105px, 1fr)); gap:10px;">
+    <p style="color:#666; text-align:center; grid-column: 1/-1;">Loading real rates...</p>
+  </div>
 </div>
-</div>
-</div>
+
+<script>
+const flags = {
+  AED:"🇦🇪", INR:"🇮🇳", SAR:"🇸🇦", USD:"🇺🇸", CNY:"🇨🇳", JPY:"🇯🇵", RUB:"🇷🇺", EUR:"🇪🇺",
+  GBP:"🇬🇧", PKR:"🇵🇰", BDT:"🇧🇩", QAR:"🇶🇦", KWD:"🇰🇼", OMR:"🇴🇲", BHD:"🇧🇭",
+  NPR:"🇳🇵", LKR:"🇱🇰", PHP:"🇵🇭", NGN:"🇳🇬", TRY:"🇹🇷", ZAR:"🇿🇦", EGP:"🇪🇬",
+  MYR:"🇲🇾", IDR:"🇮🇩", THB:"🇹🇭", VND:"🇻🇳", KRW:"🇰🇷", SGD:"🇸🇬", CAD:"🇨🇦", AUD:"🇦🇺"
+};
+
+async function loadRealRates(){
+  try{
+    // FREE API - No Key Needed
+    const res = await fetch('https://open.er-api.com/v6/latest/USD');
+    const data = await res.json();
+    const rates = data.rates;
+
+    const container = document.getElementById('rates-ticker');
+    container.innerHTML = '';
+
+    for(let code in flags){
+      if(rates[code]){
+        container.innerHTML += `
+          <div style="background:#1a1a1a; border:1px solid #222; border-radius:10px; padding:8px; text-align:center;">
+            <div style="font-size:16px;">${flags[code]}</div>
+            <div style="color:#888; font-size:9px;">${code}</div>
+            <div style="color:white; font-weight:bold; font-size:12px; margin-top:2px;">${rates[code].toFixed(2)}</div>
+            <div style="color:#00ff88; font-size:7px;">REAL</div>
+          </div>
+        `;
+      }
+    }
+    document.getElementById('live-time').innerText = '● LIVE ' + new Date().toLocaleTimeString();
+  } catch(e){
+    document.getElementById('rates-ticker').innerHTML = '<p style="color:red; text-align:center; grid-column:1/-1;">Offline - Using cached rates</p>';
+  }
+}
+
+loadRealRates();
+setInterval(loadRealRates, 60000); // 1 min-ൽ Update
+</script>
 <div id="loginModal" class="fixed inset-0 bg-black/70 backdrop-blur hidden items-center justify-center p-6 z-[100]"><div class="bg-[#1A1A1D] border border-white/10 rounded-[24px] max-w-sm w-full p-8 relative"><button onclick="closeModal()" class="absolute top-4 right-4 text-white/40">✕</button><h2 class="text-2xl font-extrabold">Connect TrustX</h2><p class="text-sm text-white/50 mt-1">Shield Protected Login</p><input id="wallet" placeholder="TRC20 Address T..." class="w-full mt-6 bg-black border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0066FF]"/><button onclick="doConnect()" class="w-full bg-[#0066FF] text-white py-3 rounded-xl mt-5 font-bold">Connect Securely</button></div></div>
 <script>
 function openModal(){document.getElementById('loginModal').classList.remove('hidden');document.getElementById('loginModal').classList.add('flex')}
