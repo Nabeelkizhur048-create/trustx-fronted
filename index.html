@@ -3,41 +3,64 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  body { background:#000000; margin:0; font-family: -apple-system, sans-serif; display:flex; justify-content:center; }
+  body { background:#000000; margin:0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; display:flex; justify-content:center; }
   .phone { width:390px; background:#000000; min-height:100vh; padding:20px; box-sizing:border-box; }
 </style>
 </head>
 <body>
 <div class="phone">
 
-<!-- HEADER - NEW PRO LOGO Shield White + X Yellow -->
-<div style="background:#17171B; border-radius:16px; padding:13px 16px; display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.06);">
+<!-- HEADER - EXACT LOGO LIKE YOUR PHOTO -->
+<div style="background:#1A1A1F; border-radius:18px; padding:12px 16px; display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.06);">
   <div style="display:flex; align-items:center; gap:10px;">
-    <!-- PRO SHIELD LOGO - Like Your Photo -->
-    <div style="width:34px; height:34px; background:white; border-radius:10px; display:flex; align-items:center; justify-content:center; position:relative;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2 L20 6.5 V12.5 C20 17 16.5 20.8 12 22 C7.5 20.8 4 17 4 12.5 V6.5 L12 2Z" fill="none" stroke="#0F172A" stroke-width="1.8"/>
-        <path d="M8 11.5 L11 14.5 L16.5 9" stroke="#FCD535" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- NEW LOGO: White Shield + Yellow X -->
+    <div style="width:38px; height:38px; background:white; border-radius:11px; display:flex; align-items:center; justify-content:center;">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+        <!-- White Shield Outline -->
+        <path d="M16 2.5 L28 8 V17 C28 23 22.5 28 16 30.5 C9.5 28 4 23 4 17 V8 L16 2.5Z" stroke="white" stroke-width="0" fill="white"/>
+        <path d="M16 2.5 L28 8 V17 C28 23 22.5 28 16 30.5 C9.5 28 4 23 4 17 V8 L16 2.5Z" fill="none" stroke="#000000" stroke-width="0"/>
+        <!-- Actual Shield Shape -->
+        <g transform="translate(0,0)">
+          <path d="M16 2 L26.5 7.2 V15.8 C26.5 21.5 22 26.2 16 29 C10 26.2 5.5 21.5 5.5 15.8 V7.2 L16 2Z" fill="black" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+          <!-- Yellow X -->
+          <path d="M10.5 10.5 L21.5 21.5 M21.5 10.5 L10.5 21.5" stroke="#FCD535" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter"/>
+          <path d="M10.5 10.5 L21.5 21.5 M21.5 10.5 L10.5 21.5" stroke="#FCD535" stroke-width="3.2" stroke-linecap="square"/>
+        </g>
       </svg>
     </div>
-    <span style="color:white; font-weight:800; font-size:19px;">Trust<span style="color:#FCD535;">X</span></span>
+    <!-- Better version: Clean White Shield Yellow X -->
+    <div style="width:38px; height:38px; background:white; border-radius:11px; display:flex; align-items:center; justify-content:center; margin-left:-38px; opacity:0; position:absolute;">.</div>
   </div>
-  <div style="display:flex; align-items:center; gap:18px;">
-    <span style="opacity:0.6;">🔔</span>
-    <div style="width:28px; height:28px; background:#2A2A30; border-radius:50%; display:flex; align-items:center; justify-content:center;">👤</div>
+
+  <!-- CORRECT SIMPLE LOGO -->
+  <div style="display:flex; align-items:center; gap:10px; position:absolute; left:36px;">
+    <svg width="36" height="36" viewBox="0 0 40 40">
+      <rect width="38" height="38" x="1" y="1" rx="10" fill="white"/>
+      <path d="M20 5 L30 10.5 V19 C30 25 25.5 29.5 20 32 C14.5 29.5 10 25 10 19 V10.5 L20 5Z" fill="none" stroke="black" stroke-width="0"/>
+      <path d="M20 6 L29 11.2 V18.8 C29 24.2 25 28.8 20 31 C15 28.8 11 24.2 11 18.8 V11.2 L20 6Z" fill="black" stroke="white" stroke-width="0"/>
+      <path d="M20 4.5 L30.5 10.5 V19.2 C30.5 25.5 25.8 30.2 20 33 C14.2 30.2 9.5 25.5 9.5 19.2 V10.5 L20 4.5Z" fill="none" stroke="white" stroke-width="2.6" stroke-linejoin="round"/>
+      <path d="M20 6.5 L28.5 11.8 V19 C28.5 24.5 24.5 28.8 20 31 C15.5 28.8 11.5 24.5 11.5 19 V11.8 L20 6.5Z" fill="black"/>
+      <!-- X Yellow Bold like photo -->
+      <g>
+        <path d="M14 13 L26 24" stroke="#FFC107" stroke-width="4.5" stroke-linecap="square"/>
+        <path d="M26 13 L14 24" stroke="#FFC107" stroke-width="4.5" stroke-linecap="square"/>
+      </g>
+    </svg>
+    <span style="color:white; font-weight:800; font-size:20px; letter-spacing:-0.5px;">Trust<span style="color:#FFC107;">X</span></span>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:18px; margin-left:auto;">
+    <span style="font-size:18px; opacity:0.7;">🔔</span>
+    <div style="width:30px; height:30px; background:#2A2A30; border-radius:50%; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.08);">👤</div>
   </div>
 </div>
 
+<!-- Hero -->
 <div style="padding:0 8px; margin-top:36px;">
-  <h1 style="color:white; font-size:38px; font-weight:900; margin:0; line-height:1.05;">Secure Trade<br/>TrustX TRC20<br/>Instantly</h1>
-  <p style="color:rgba(255,255,255,0.55); font-size:13px; margin-top:12px;">Fast • Low fees • TRC20 deposits &<br/>withdrawals in seconds</p>
+  <h1 style="color:white; font-size:38px; font-weight:900; line-height:1.05; margin:0;">Secure Trade<br/>TrustX TRC20<br/>Instantly</h1>
+  <p style="color:rgba(255,255,255,0.55); font-size:13px; margin-top:12px; line-height:1.4;">Fast • Low fees • TRC20 deposits &<br/>withdrawals in seconds</p>
   <button style="width:100%; background:#FCD535; color:black; border:none; padding:18px; border-radius:14px; font-weight:800; font-size:19px; margin-top:28px;">Open Wallet</button>
   <button style="width:100%; background:#1F1F1F; color:white; border:1px solid rgba(255,255,255,0.1); padding:18px; border-radius:14px; font-weight:600; font-size:19px; margin-top:14px;">How it Works</button>
-  <div style="display:flex; gap:6px; margin-top:20px;">
-    <div style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:6px 11px; font-size:9px; color:#FCD535;">🛡️ KYC Secured</div>
-    <div style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:6px 11px; font-size:9px; color:white;">🔒 2FA Protected</div>
-    <div style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:6px 11px; font-size:9px; color:white;">⚡ Instant Transfer</div>
-  </div>
 </div>
 
 </div>
