@@ -42,14 +42,13 @@
 <!-- RIGHT SIDE - FULL COMBO -->
 <div>
 <!-- 1. REAL LIVE RATES -->
-<div style="background:#111; border:1px solid #222; border-radius:16px; padding:16px; margin-bottom:16px;">
+<div style="background:#111318; border:1px solid #222; border-radius:16px; padding:14px;">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-    <h3 style="color:white; font-size:14px; margin:0;">🌍 REAL LIVE RATES</h3>
+    <h3 style="color:white; font-size:13px; font-weight:800; margin:0;">🌍 REAL LIVE RATES</h3>
     <span id="live-time" style="color:#00ff88; font-size:10px; background:#00ff8820; padding:4px 10px; border-radius:20px;">● LIVE</span>
   </div>
-  <div id="rates-ticker" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px;">
-    <p style="color:#666; text-align:center; grid-column: 1/-1;">Loading real rates...</p>
-  </div>
+  <div id="rates-list" style="display:flex; flex-direction:column;"></div>
+  <button id="view-all-btn" onclick="toggleRates()" style="width:100%; margin-top:10px; background:#1a1a1a; border:1px solid #333; color:#888; font-size:11px; font-weight:bold; padding:10px; border-radius:10px;">View All Rates (18) ↓</button>
 </div>
 
 <!-- 2. WHY TRUSTX -->
