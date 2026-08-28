@@ -97,22 +97,7 @@ async function loadRealRates(){
 loadRealRates();
 setInterval(loadRealRates, 60000);
 
-const payouts = [
-  {name:"Rahul K.", amt:"2000 USDT → INR", time:"Just now"},
-  {name:"Ahmed A.", amt:"500 USDT → AED", time:"2 min ago"},
-  {name:"Suresh P.", amt:"1500 USDT → INR", time:"5 min ago"},
-];
-function renderPayouts(){
-  const el = document.getElementById('payout-list');
-  if(!el) return;
-  el.innerHTML = payouts.map(p=>`
-    <div style="display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; padding:8px 10px; border-radius:8px;">
-      <div style="display:flex; align-items:center; gap:8px;"><div style="width:24px; height:24px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; color:white;">${p.name[0]}</div><div><div style="color:white; font-size:11px;">${p.name}</div><div style="color:#888; font-size:9px;">${p.amt}</div></div></div>
-      <div style="text-align:right;"><div style="color:#00ff88; font-size:9px;">✓ Paid</div><div style="color:#555; font-size:8px;">${p.time}</div></div>
-    </div>`).join('');
-}
-renderPayouts();
-setInterval(()=>{ payouts.unshift({name:["Vikram","Ali","Raj","Salman"][Math.floor(Math.random()*4)]+" M.", amt:Math.floor(Math.random()*2000+100)+" USDT → AED", time:"Just now"}); payouts.pop(); renderPayouts(); }, 4000);
+
 </script>
 </body>
 </html>
