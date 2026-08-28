@@ -12,67 +12,72 @@
 <nav class="border-b border-white/10">
 <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
 <div class="flex items-center gap-3">
-<!-- NEW BLUE SHIELD LOGO SVG -->
 <div class="w-10 h-10 bg-[#0066FF] rounded-xl flex items-center justify-center">
 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M7 7l10 10M17 7L7 17" stroke-width="2"/></svg>
 </div>
 <div><div class="font-extrabold text-lg leading-none">TrustX</div><div class="text-[11px] text-[#0066FF] tracking-[0.3em] font-bold">TRC20</div></div>
 </div>
 </div>
-</div>
 </nav>
+
 <div class="max-w-6xl mx-auto px-6 pt-16 pb-10">
-<div class="grid md:grid-cols-2 gap-12 items-center">
+<div class="grid md:grid-cols-2 gap-12 items-start">
+
+<!-- LEFT SIDE -->
 <div>
 <div class="inline-flex bg-[#0066FF]/10 border border-[#0066FF]/20 text-[#0066FF] px-3 py-1 rounded-full text-[11px] font-bold mb-5">🛡️ SHIELD PROTECTED • TRC20</div>
 <h1 class="text-[44px] md:text-[58px] font-[800] leading-[0.95]">Secure Trade<br><span class="text-[#0066FF]">TrustX TRC20</span><br>Instantly.</h1>
 <p class="text-white/60 mt-5 text-[16px] max-w-md">UAE's most trusted TRC20 escrow. Shield protection, 0% fraud, instant Tron confirmation.</p>
-<div class="flex gap-4 mt-8"><button onclick="window.location.href='wallet.html'" class="bg-[#0066FF] text-white font-black py-4 px-7 rounded-full text-[17px] whitespace-nowrap flex items-center justify-center gap-2">🛡️ Open Wallet</button><button onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})" class="bg-white/10 text-white font-black py-4 px-7 rounded-full text-[17px] whitespace-nowrap border border-white/20 flex items-center justify-center gap-2">▶️ How it Works</button></div>
-<div class="flex gap-6 mt-8 text-[12px]"><div><div class="text-white/40">Network</div><div class="font-bold">TRON (TRC20)</div></div><div><div class="text-white/40">Protection</div><div class="font-bold">Shield X</div></div><div><div class="text-white/40">Speed</div><div class="font-bold">&lt; 30 Sec</div></div></div>
+<div class="flex gap-4 mt-8">
+<button onclick="window.location.href='wallet.html'" class="bg-[#0066FF] text-white font-black py-4 px-7 rounded-full text-[17px] flex items-center gap-2">🛡️ Open Wallet</button>
+<button onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})" class="bg-white/10 text-white font-black py-4 px-7 rounded-full text-[17px] border border-white/20 flex items-center gap-2">▶️ How it Works</button>
 </div>
-<!-- ===== FULL COMBO: LIVE RATE + TRUST + PAYOUTS ===== -->
+<div class="flex gap-6 mt-8 text-[12px]">
+<div><div class="text-white/40">Network</div><div class="font-bold">TRON (TRC20)</div></div>
+<div><div class="text-white/40">Protection</div><div class="font-bold">Shield X</div></div>
+<div><div class="text-white/40">Speed</div><div class="font-bold">&lt; 30 Sec</div></div>
+</div>
+</div>
 
-<!-- 1. REAL LIVE RATES (TOP) -->
-<div style="background:#111; border:1px solid #222; border-radius:16px; padding:16px; margin:20px 0;">
+<!-- RIGHT SIDE - FULL COMBO -->
+<div>
+<!-- 1. REAL LIVE RATES -->
+<div style="background:#111; border:1px solid #222; border-radius:16px; padding:16px; margin-bottom:16px;">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
     <h3 style="color:white; font-size:14px; margin:0;">🌍 REAL LIVE RATES</h3>
     <span id="live-time" style="color:#00ff88; font-size:10px; background:#00ff8820; padding:4px 10px; border-radius:20px;">● LIVE</span>
   </div>
-  <div id="rates-ticker" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(105px, 1fr)); gap:10px;">
+  <div id="rates-ticker" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px;">
     <p style="color:#666; text-align:center; grid-column: 1/-1;">Loading real rates...</p>
   </div>
 </div>
 
-<!-- 2. WHY TRUSTX (MIDDLE) -->
-<div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin: 20px 0;">
+<!-- 2. WHY TRUSTX -->
+<div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:16px;">
   <div style="background:#111318; border:1px solid #222; border-radius:12px; padding:12px; text-align:center;">
-    <div style="font-size:20px;">🛡️</div>
-    <div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">100% Safe</div>
-    <div style="color:#888; font-size:9px;">Secure & Encrypted</div>
+    <div style="font-size:20px;">🛡️</div><div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">100% Safe</div><div style="color:#888; font-size:9px;">Secure</div>
   </div>
   <div style="background:#111318; border:1px solid #222; border-radius:12px; padding:12px; text-align:center;">
-    <div style="font-size:20px;">⚡</div>
-    <div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">Instant 5 Min</div>
-    <div style="color:#888; font-size:9px;">Fast Payouts</div>
+    <div style="font-size:20px;">⚡</div><div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">Instant 5 Min</div><div style="color:#888; font-size:9px;">Fast Payouts</div>
   </div>
   <div style="background:#111318; border:1px solid #222; border-radius:12px; padding:12px; text-align:center;">
-    <div style="font-size:20px;">💬</div>
-    <div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">24/7 Support</div>
-    <div style="color:#888; font-size:9px;">Always Online</div>
+    <div style="font-size:20px;">💬</div><div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">24/7 Support</div><div style="color:#888; font-size:9px;">Always Online</div>
   </div>
 </div>
 
-<!-- 3. LIVE PAYOUTS (BOTTOM) -->
-<div style="background:#111318; border:1px solid #222; border-radius:16px; padding:14px; margin:20px 0;">
+<!-- 3. LIVE PAYOUTS -->
+<div style="background:#111318; border:1px solid #222; border-radius:16px; padding:14px;">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-    <h3 style="color:white; font-size:12px; margin:0;">🔴 Live Payouts</h3>
-    <span style="color:#00ff88; font-size:9px;">● 1,248 Online</span>
+    <h3 style="color:white; font-size:12px; margin:0;">🔴 Live Payouts</h3><span style="color:#00ff88; font-size:9px;">● 1,248 Online</span>
   </div>
   <div id="payout-list" style="display:flex; flex-direction:column; gap:8px;"></div>
 </div>
+</div>
+
+</div>
+</div>
 
 <script>
-// --- LIVE RATES API ---
 const flags = { AED:"🇦🇪", INR:"🇮🇳", SAR:"🇸🇦", USD:"🇺🇸", CNY:"🇨🇳", JPY:"🇯🇵", RUB:"🇷🇺", EUR:"🇪🇺", GBP:"🇬🇧", PKR:"🇵🇰", BDT:"🇧🇩", QAR:"🇶🇦", KWD:"🇰🇼", OMR:"🇴🇲", BHD:"🇧🇭", PHP:"🇵🇭", TRY:"🇹🇷", ZAR:"🇿🇦" };
 async function loadRealRates(){
   try{
@@ -92,14 +97,15 @@ async function loadRealRates(){
 loadRealRates();
 setInterval(loadRealRates, 60000);
 
-// --- LIVE PAYOUTS ---
 const payouts = [
   {name:"Rahul K.", amt:"2000 USDT → INR", time:"Just now"},
   {name:"Ahmed A.", amt:"500 USDT → AED", time:"2 min ago"},
   {name:"Suresh P.", amt:"1500 USDT → INR", time:"5 min ago"},
 ];
 function renderPayouts(){
-  document.getElementById('payout-list').innerHTML = payouts.map(p=>`
+  const el = document.getElementById('payout-list');
+  if(!el) return;
+  el.innerHTML = payouts.map(p=>`
     <div style="display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; padding:8px 10px; border-radius:8px;">
       <div style="display:flex; align-items:center; gap:8px;"><div style="width:24px; height:24px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; color:white;">${p.name[0]}</div><div><div style="color:white; font-size:11px;">${p.name}</div><div style="color:#888; font-size:9px;">${p.amt}</div></div></div>
       <div style="text-align:right;"><div style="color:#00ff88; font-size:9px;">✓ Paid</div><div style="color:#555; font-size:8px;">${p.time}</div></div>
@@ -108,11 +114,5 @@ function renderPayouts(){
 renderPayouts();
 setInterval(()=>{ payouts.unshift({name:["Vikram","Ali","Raj","Salman"][Math.floor(Math.random()*4)]+" M.", amt:Math.floor(Math.random()*2000+100)+" USDT → AED", time:"Just now"}); payouts.pop(); renderPayouts(); }, 4000);
 </script>
-function openModal(){document.getElementById('loginModal').classList.remove('hidden');document.getElementById('loginModal').classList.add('flex')}
-function closeModal(){document.getElementById('loginModal').classList.add('hidden')}
-function doTrade(){const a=document.getElementById('trcAddr').value;if(!a.startsWith('T')){alert('Enter valid TRC20 address starting with T');return}alert('🛡️ Shield Verified: '+a.substring(0,8)+'...');}
-function doConnect(){const w=document.getElementById('wallet').value;if(!w){alert('Enter TRC20 Address');return}alert('🛡️ Wallet Shield Connected!');closeModal()}
-</script>
-  
 </body>
 </html>
