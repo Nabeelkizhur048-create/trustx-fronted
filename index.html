@@ -1,105 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrustX TRC20 - Secure Escrow</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-<style>body{font-family:'Plus Jakarta Sans',sans-serif}</style>
+<style>
+  body { background:#000000; margin:0; font-family: -apple-system, sans-serif; display:flex; justify-content:center; }
+  .phone { width:390px; background:#000000; min-height:100vh; padding:20px; box-sizing:border-box; }
+</style>
 </head>
-<body class="bg-black text-white">
-<nav class="border-b border-white/10">
-<div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
-<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5 3 8.5 8 10 5-1.5 8-5 8-10V6l-8-4z" stroke="black" stroke-width="2" fill="white"/><text x="12" y="16" text-anchor="middle" font-weight="900" font-size="13" fill="#FCD535">X</text></svg>
-</div>
-<div><div class="font-extrabold text-lg leading-none"><span class="text-white">Trust</span><span class="text-[#FCD535]">X</span></div></div>
-</div>
-</div>
-</nav>
+<body>
+<div class="phone">
 
-<div class="max-w-6xl mx-auto px-6 pt-16 pb-10">
-<div class="grid md:grid-cols-2 gap-12 items-start">
-
-<!-- LEFT SIDE -->
-<div>
-<div class="inline-flex bg-[#0066FF]/10 border border-[#0066FF]/20 text-[#0066FF] px-3 py-1 rounded-full text-[11px] font-bold mb-5">🛡️ SHIELD PROTECTED • TRC20</div>
-<h1 class="text-[44px] md:text-[58px] font-[800] leading-[0.95]">Secure Trade<br><span class="text-[#0066FF]">TrustX TRC20</span><br>Instantly.</h1>
-<p class="text-white/60 mt-5 text-[16px] max-w-md">UAE's most trusted TRC20 escrow. Shield protection, 0% fraud, instant Tron confirmation.</p>
-<div class="flex flex-col gap-3 mt-8 w-full max-w-sm">
-  <!-- Binance Style Full Width Yellow Button -->
-  <button onclick="window.location.href='wallet'" class="w-full bg-[#FCD535] text-black py-4 rounded-2xl font-black text-[16px] shadow-[0_0_20px_rgba(252,213,53,0.3)]">Open Wallet</button>
-
-  <!-- Live Rate Full Width Dark -->
-  <button onclick="window.location.href='rates'" class="w-full bg-[#1A1A1A] border border-white/10 text-white py-4 rounded-2xl font-bold text-[16px] flex items-center justify-center gap-2"><span class="w-2 h-2 bg-[#00ff88] rounded-full animate-pulse"></span> Live Rate</button>
-</div>
-
-  <!-- Live Rate Full Width Dark -->
-  <button onclick="window.location.href='rates'" class="w-full bg-[#1A1A1A] border border-white/10 text-white py-4 rounded-2xl font-bold text-[16px] flex items-center justify-center gap-2"><span class="w-2 h-2 bg-[#00ff88] rounded-full animate-pulse"></span> Live Rate</button>
-</div>
-</div>
-</div>
-<div class="flex gap-6 mt-8 text-[12px]">
-<div><div class="text-white/40">Network</div><div class="font-bold">TRON (TRC20)</div></div>
-<div><div class="text-white/40">Protection</div><div class="font-bold">Shield X</div></div>
-<div><div class="text-white/40">Speed</div><div class="font-bold">&lt; 30 Sec</div></div>
-</div>
-</div>
-
-<!-- RIGHT SIDE - FULL COMBO -->
-<div>
-<!-- 1. REAL LIVE RATES -->
-<div style="background:#111318; border:1px solid #222; border-radius:16px; padding:14px;">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-    <h3 style="color:white; font-size:13px; font-weight:800; margin:0;">🌍 REAL LIVE RATES</h3>
-    <span id="live-time" style="color:#00ff88; font-size:10px; background:#00ff8820; padding:4px 10px; border-radius:20px;">● LIVE</span>
+  <!-- Header -->
+  <div style="background:#151515; border-radius:14px; padding:12px 16px; display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+    <div style="display:flex; align-items:center; gap:8px; color:white; font-weight:800; font-size:20px;">
+      <div style="background:white; border-radius:8px; width:28px; height:28px; display:flex; align-items:center; justify-content:center;">🛡️</div>
+      TrustX
+    </div>
+    <div style="display:flex; gap:14px; font-size:18px; color:rgba(255,255,255,0.6);">
+      🔔 👤
+    </div>
   </div>
-  <div id="rates-list" style="display:flex; flex-direction:column;"></div>
-  <button id="view-all-btn" onclick="toggleRates()" style="width:100%; margin-top:10px; background:#1a1a1a; border:1px solid #333; color:#888; font-size:11px; font-weight:bold; padding:10px; border-radius:10px;">View All Rates (18) ↓</button>
-</div>
 
-<!-- 2. WHY TRUSTX -->
-<div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:16px;">
-  <div style="background:#111318; border:1px solid #222; border-radius:12px; padding:12px; text-align:center;">
-    <div style="font-size:20px;">🛡️</div><div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">100% Safe</div><div style="color:#888; font-size:9px;">Secure</div>
+  <!-- Hero -->
+  <div style="padding:0 8px; margin-top:36px;">
+    <h1 style="color:white; font-size:38px; font-weight:900; line-height:1.05; margin:0; letter-spacing:-0.5px;">
+      Secure Trade<br/>
+      TrustX TRC20<br/>
+      Instantly
+    </h1>
+    <p style="color:rgba(255,255,255,0.55); font-size:13px; margin-top:10px; line-height:1.4;">
+      Fast • Low fees • TRC20 deposits &<br/>
+      withdrawals in seconds
+    </p>
+
+    <!-- Buttons - Photo പോലെ തന്നെ -->
+    <button style="width:100%; background:#FCD535; color:black; border:none; padding:18px; border-radius:14px; font-weight:800; font-size:19px; margin-top:28px;">
+      Open Wallet
+    </button>
+
+    <button style="width:100%; background:#1F1F1F; color:white; border:1px solid rgba(255,255,255,0.1); padding:18px; border-radius:14px; font-weight:600; font-size:19px; margin-top:14px;">
+      How it Works
+    </button>
+
+    <!-- Badges -->
+    <div style="display:flex; gap:6px; margin-top:20px;">
+      <div style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:5px 10px; font-size:9px; color:#FCD535; font-weight:600;">🛡️ KYC Secured</div>
+      <div style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:5px 10px; font-size:9px; color:white; font-weight:500;">🔒 2FA Protected</div>
+      <div style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:5px 10px; font-size:9px; color:white; font-weight:500;">⚡ Instant Transfer</div>
+    </div>
+
+    <!-- Bottom TRC20 -->
+    <div style="background:#111111; border-radius:14px; padding:14px; margin-top:32px; display:flex; gap:20px; font-size:10px; color:rgba(255,255,255,0.6); font-weight:600;">
+      <div style="display:flex; align-items:center; gap:6px;"><span style="background:#26A17B; color:white; border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center; font-size:8px;">USDT</span> USDT • TRC20</div>
+      <div style="display:flex; align-items:center; gap:6px;"><span style="background:#EF0027; color:white; border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center; font-size:8px;">TRX</span> TRX • TRC20</div>
+    </div>
+
   </div>
-  <div style="background:#111318; border:1px solid #222; border-radius:12px; padding:12px; text-align:center;">
-    <div style="font-size:20px;">⚡</div><div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">Instant 5 Min</div><div style="color:#888; font-size:9px;">Fast Payouts</div>
-  </div>
-  <div style="background:#111318; border:1px solid #222; border-radius:12px; padding:12px; text-align:center;">
-    <div style="font-size:20px;">💬</div><div style="color:white; font-size:11px; font-weight:bold; margin-top:5px;">24/7 Support</div><div style="color:#888; font-size:9px;">Always Online</div>
-  </div>
+
 </div>
-<script>
-const flags={AED:"🇦🇪",INR:"🇮🇳",SAR:"🇸🇦",USD:"🇺🇸",CNY:"🇨🇳",JPY:"🇯🇵",RUB:"🇷🇺",EUR:"🇪🇺",GBP:"🇬🇧",PKR:"🇵🇰",BDT:"🇧🇩",QAR:"🇶🇦",KWD:"🇰🇼",OMR:"🇴🇲",BHD:"🇧🇭",PHP:"🇵🇭",TRY:"🇹🇷",ZAR:"🇿🇦"};
-let allRates={}, showAll=false;
-async function loadRealRates(){
- try{
-  const res=await fetch('https://open.er-api.com/v6/latest/USD');
-  const data=await res.json();
-  allRates=data.rates; renderRates();
-  const lt=document.getElementById('live-time');
-  if(lt) lt.innerText='● LIVE '+new Date().toLocaleTimeString().slice(0,5);
- }catch(e){}
-}
-function renderRates(){
- const c=document.getElementById('rates-list'); if(!c) return;
- c.innerHTML='';
- const codes=Object.keys(flags);
- const list=showAll?codes:codes.slice(0,6);
- list.forEach(code=>{
-  if(allRates[code]){
-   c.innerHTML+=`<div style="display:flex; justify-content:space-between; align-items:center; padding:11px 4px; border-bottom:1px solid #1e1e1e;"><div style="display:flex; align-items:center; gap:10px;"><span style="font-size:18px;">${flags[code]}</span><span style="color:#aaa; font-size:13px; font-weight:700;">${code}</span></div><div style="display:flex; gap:8px;"><span style="color:white; font-weight:800; font-size:13px;">${allRates[code].toFixed(2)}</span><span style="color:#00ff88; font-size:10px;">▲</span></div></div>`;
-  }
- });
-}
-function toggleRates(){ showAll=!showAll; const b=document.getElementById('view-all-btn'); if(b) b.innerText=showAll?'Show Less ↑':'View All Rates (18) ↓'; renderRates(); }
-loadRealRates(); setInterval(loadRealRates,60000);
-</script>
 </body>
 </html>
-
-
-
