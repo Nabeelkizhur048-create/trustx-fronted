@@ -103,7 +103,7 @@ window.onload = () => { initTron(); }
 async function createWallet(){
   try{
     document.getElementById('createBox').innerHTML = "<p style='color:yellow'>Creating REAL TRC20 Wallet... Please Wait...</p>";
-    const res = await fetch('https://trustx-backend.vercel.app/api/');
+    const res = await fetch('https://trustx-backend.vercel.app/', { method: 'GET' });
     const data = await res.json();
     if(data.success && data.address) {
       walletAddr = data.address;
