@@ -100,20 +100,23 @@ function initTron(){
 }
 window.onload = () => { initTron(); }
 
-function createWallet(){
+async function createWallet(){
   try{
-    if(!tronWeb) tronWeb = new TronWeb({fullHost: 'https://api.trongrid.io'});
-    const account = tronWeb.utils.accounts.generateAccount();
-    walletAddr = account.address.base58;
-    privateKey = account.privateKey;
-    localStorage.setItem('trustx_addr', walletAddr);
-    localStorage.setItem('trustx_pk', privateKey);
-    document.getElementById('pkText').innerText = privateKey;
-    document.getElementById('pkWarning').classList.remove('hidden');
-    initWallet();
-    alert('🛡️ Wallet Created! Address: '+walletAddr);
+    document.getElementById('createBox').innerHTML = "<p style='color:yellow'>Creating REAL TRC20 Wallet... Please Wait...</p>";
+    const res = await fetch('https://trustx-backend.vercel.app/api/');
+    const data = await res.json();
+    if(data.success && data.address) {
+      walletAddr = data.address;
+      localStorage.setItem('trustx_wallet', walletAddr);
+      if(data.privateKey){
+        localStorage.setItem('trustx_key', data.privateKey);
+      }
+      location.reload();
+    } else {
+      alert('Failed');
+    }
   }catch(e){
-    alert('Error Creating Wallet: '+e.message+' - Please refresh and try again');
+    alert('Error: '+e.message);
   }
 }
 
